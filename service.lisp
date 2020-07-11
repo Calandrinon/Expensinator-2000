@@ -14,6 +14,10 @@
 	(push-to-repository (repository service) expense)))
 
 
+(defmethod remove-expense (title price (service Service))
+	(remove-from-repository title price (repository service)))
+
+
 (defmethod get-container ((service Service))
 	(get-repository-container (repository service)))
 
