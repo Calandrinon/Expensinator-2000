@@ -35,7 +35,21 @@
 		(finish-output)
 		(setf price (read-line))	
 		(setf price (parse-float price))
-			(add-expense product price (service ui))))
+		(add-expense product price (service ui))))
+
+
+(defmethod ui-remove ((ui UI))
+	(let* ((product "")
+		   (price 0))
+		(format t "Enter the product name: ")	
+		(finish-output)
+		(setf product (read-line))	
+
+		(format t "Enter the price: ")	
+		(finish-output)
+		(setf price (read-line))	
+		(setf price (parse-float price))
+		(remove-expense product price (service ui))))
 
 
 (defmethod ui-list ((ui UI))
@@ -47,7 +61,7 @@
 
 (defmethod ui-run ((ui UI))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove)))
 		   (tokens (list)))
 
 		(loop for i from 1 to 50
