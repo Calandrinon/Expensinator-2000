@@ -14,6 +14,16 @@
 	  :initform 1)))
 
 
+(defmethod ui-help ((ui UI))
+	(format t "Commands:~%")
+	(format t "		- add [adds a new expense]~%")
+	(format t "		- remove [removes an expense]~%")
+	(format t "		- list [displays all the expenses on the screen]~%")
+	(format t "		- exit [exits the program]~%")
+	(format t "		- clear [clears the screen]~%")
+	(format t "		- help [displays this message]~%"))
+
+
 (defmethod ui-exit ((ui UI)) 
 	(setf (running ui) 0)
 	(exit))	
@@ -65,7 +75,7 @@
 
 (defmethod ui-run ((ui UI))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove) (cons 'help #'ui-help)))
 		   (tokens (list)))
 
 		(loop for i from 1 to 50
