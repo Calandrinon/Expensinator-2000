@@ -10,18 +10,17 @@
 	(push expense (container repo)))
 
 
-(defmethod remove-from-repository (title price (repo Repository))
+(defmethod remove-from-repository (id (repo Repository))
 	(defun remove-nth (index list)
 			(let* ((deleted '()))
 				(setf (nth index list) deleted)
 				(remove deleted list)
 				(remove NIL list)))
 
-	(let* ((expense-to-remove (make-instance 'Expense :expense-title title :price price))
-		   (index 0))	
+	(let* ((index 0))
 		(loop for expense in (container repo)
 			do 
-			(if (equal-expenses expense expense-to-remove)
+			(if (= (id expense) id)
 				(progn
 					(remove-nth index (container repo))
 					(setf (container repo) (remove nil (container repo)))

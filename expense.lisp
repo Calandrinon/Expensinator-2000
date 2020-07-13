@@ -1,5 +1,11 @@
 (defclass Expense ()
-	((expense-title 
+	((id
+	 :accessor id
+	 :initarg :id)
+	 (category
+	 :accessor category
+	 :initarg :category)
+	 (expense-title 
 	  :accessor expense-title
 	  :initarg :expense-title)
 	 (price
@@ -7,13 +13,11 @@
 	  :initarg :price)))
 
 
-(defmethod equal-expenses ((expense1 Expense) (expense2 Expense))
-	(if (and
-			(string-equal (expense-title expense1) (expense-title expense2))
-			(= (price expense1) (price expense2)))
+(defmethod identical-expenses ((expense1 Expense) (expense2 Expense))
+	(if (= (id expense1) (id expense2))
 		t
-		nil)) 
+		nil))
 
 
 (defmethod display-expense ((expense Expense))
-	(format t "-----------------------------------------------------------------------------------------~%Product name: ~A | Price: ~A~%-----------------------------------------------------------------------------------------~%" (expense-title expense) (price expense)))
+	(format t "-----------------------------------------------------------------------------------------~%ID: ~A | Category: ~A | Product name: ~A | Price: ~A~%-----------------------------------------------------------------------------------------~%" (id expense) (category expense) (expense-title expense) (price expense)))

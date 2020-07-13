@@ -9,13 +9,13 @@
 	(make-instance 'Service :repository repository))
 
 
-(defmethod add-expense (title price (service Service))
-	(let* ((expense (make-instance 'Expense :expense-title title :price price)))
+(defmethod add-expense (id category title price (service Service))
+	(let* ((expense (make-instance 'Expense :id id :category category :expense-title title :price price)))
 	(push-to-repository (repository service) expense)))
 
 
-(defmethod remove-expense (title price (service Service))
-	(remove-from-repository title price (repository service)))
+(defmethod remove-expense (id (service Service))
+	(remove-from-repository id (repository service)))
 
 
 (defmethod get-container ((service Service))
