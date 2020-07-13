@@ -7,6 +7,12 @@
 	 :initform '())))	
 
 (defmethod push-to-repository ((repo Repository) (expense Expense)) 
+	(loop for it-expense in (container repo)
+		do (progn
+				(if (= (id it-expense) (id expense)) 
+					(progn
+					(format t "ERROR: Unable to insert a product with the same ID!")
+					(return-from push-to-repository -1)))))	
 	(push expense (container repo)))
 
 
