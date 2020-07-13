@@ -73,9 +73,33 @@
 			)))
 
 
+(defmethod ui-update ((ui UI))
+	(let* ((id 0)
+		   (category "")
+		   (product "")
+		   (price 0))	
+		(format t "Enter the id: ")	
+		(finish-output)
+		(setf id (read-from-string (read-line)))	
+
+		(format t "Enter the new category: ")	
+		(finish-output)
+		(setf category (read-line))	
+
+		(format t "Enter the new product name: ")	
+		(finish-output)
+		(setf product (read-line))	
+
+		(format t "Enter the new price: ")	
+		(finish-output)
+		(setf price (read-line))	
+		(setf price (parse-float price))
+		(update-expense id category product price (service ui))))
+
+
 (defmethod ui-run ((ui UI))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove) (cons 'help #'ui-help)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove) (cons 'help #'ui-help) (cons 'update #'ui-update)))
 		   (tokens (list)))
 
 		(loop for i from 1 to 50

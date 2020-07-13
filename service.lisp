@@ -18,6 +18,11 @@
 	(remove-from-repository id (repository service)))
 
 
+(defmethod update-expense (id category title price (service Service)) 
+	(remove-from-repository id (repository service))	
+	(push-to-repository (repository service) (make-instance 'Expense :id id :category category :expense-title title :price price)))
+
+
 (defmethod get-container ((service Service))
 	(get-repository-container (repository service)))
 
