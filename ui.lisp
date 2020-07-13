@@ -33,7 +33,7 @@
 
 (defmethod ui-run ((ui UI))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add)))
 		   (tokens (list)))
 		(loop while (= (running ui) 1)
 			do (progn 
