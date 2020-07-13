@@ -15,7 +15,8 @@
 
 
 (defmethod ui-exit ((ui UI)) 
-	(setf (running ui) 0))	
+	(setf (running ui) 0)
+	(exit))	
 
 (defmethod ui-add ((ui UI))
 	(let* ((product "")
@@ -31,9 +32,16 @@
 			(add-expense product price (service ui))))
 
 
+(defmethod ui-list ((ui UI))
+	(let* ((container (get-container (service ui))))
+		(loop for product in container
+			do (display-expense product)
+			)))
+
+
 (defmethod ui-run ((ui UI))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list)))
 		   (tokens (list)))
 		(loop while (= (running ui) 1)
 			do (progn 

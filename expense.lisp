@@ -14,3 +14,6 @@
 		t
 		nil)) 
 
+
+(defmethod display-expense ((expense Expense))
+	(format t "-----------------------------------------------------------------------------------------~%Product name: ~A; Price: ~A~%-----------------------------------------------------------------------------------------~%" (expense-title expense) (price expense)))
