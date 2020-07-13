@@ -18,6 +18,12 @@
 	(setf (running ui) 0)
 	(exit))	
 
+
+(defmethod ui-clearscreen ((ui UI)) 
+	(loop for i from 1 to 100	
+		do (terpri)))
+
+
 (defmethod ui-add ((ui UI))
 	(let* ((product "")
 		   (price 0))
@@ -41,13 +47,16 @@
 
 (defmethod ui-run ((ui UI))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen)))
 		   (tokens (list)))
+
+		(loop for i from 1 to 50
+			do (ui-clearscreen ui))		
+
 		(loop while (= (running ui) 1)
 			do (progn 
 				(print '>>>)
 				(finish-output)
 				(setf command (read-line))
 				(setf tokens (cl-ppcre:split "\\s+" command))
-				(funcall (cdr (assoc (read-from-string (nth 0 tokens)) commands)) ui)
-				))))
+				(funcall (cdr (assoc (read-from-string (nth 0 tokens)) commands)) ui)))))
