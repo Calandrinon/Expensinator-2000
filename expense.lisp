@@ -12,6 +12,5 @@
 			(string-equal (expense-title expense1) (expense-title expense2))
 			(= (price expense1) (price expense2)))
 		t
-		nil
-	)) 
+		nil)) 
 
