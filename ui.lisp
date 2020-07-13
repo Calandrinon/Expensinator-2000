@@ -1,6 +1,9 @@
 (load "service.lisp")
 (load "~/quicklisp/setup.lisp")
 (ql:quickload :cl-ppcre)
+(ql:quickload :parse-float)
+(use-package :parse-float)
+
 
 (defclass UI ()
 	((service 
@@ -13,6 +16,19 @@
 
 (defmethod ui-exit ((ui UI)) 
 	(setf (running ui) 0))	
+
+(defmethod ui-add ((ui UI))
+	(let* ((product "")
+		   (price 0))
+		(format t "Enter the product name: ")	
+		(finish-output)
+		(setf product (read-line))	
+
+		(format t "Enter the price: ")	
+		(finish-output)
+		(setf price (read-line))	
+		(setf price (parse-float price))
+			(add-expense product price (service ui))))
 
 
 (defmethod ui-run ((ui UI))
@@ -27,4 +43,3 @@
 				(setf tokens (cl-ppcre:split "\\s+" command))
 				(funcall (cdr (assoc (read-from-string (nth 0 tokens)) commands)) ui)
 				))))
-
