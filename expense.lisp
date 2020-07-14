@@ -21,3 +21,6 @@
 
 (defmethod display-expense ((expense Expense))
 	(format t "-----------------------------------------------------------------------------------------~%ID: ~A | Category: ~A | Product name: ~A | Price: ~A~%-----------------------------------------------------------------------------------------~%" (id expense) (category expense) (expense-title expense) (price expense)))
+
+(defmethod expense-to-csv-format ((expense Expense))
+	(format t "~A, ~A, ~A, ~A~%" (id expense) (category expense) (expense-title expense) (price expense)))

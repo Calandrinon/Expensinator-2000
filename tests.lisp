@@ -31,9 +31,20 @@
 			(print "Test-service-remove passed!")))
 
 
+(defun test-expense-to-csv-format ()
+	(let* ((test-repository (make-instance 'Repository))
+		   (test-service (create-service test-repository))
+		   (container (list)))
+			(add-expense 1 "Education" "Book" 25.99 test-service)
+			(setf container (get-container test-service))	
+			(assert (string-equal (expense-to-csv-format (nth 0 container)) "1, Education, Book, 25.99"))
+			(print "Test-expense-to-csv-format passed!")))
+
+
 (defun run-tests ()
 	(test-service-add)
 	(test-repo-remove)
-	(test-service-remove))
+	(test-service-remove)
+	(test-expense-to-csv-format))
 
 
