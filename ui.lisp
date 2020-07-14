@@ -111,4 +111,6 @@
 				(finish-output)
 				(setf command (read-line))
 				(setf tokens (cl-ppcre:split "\\s+" command))
-				(funcall (cdr (assoc (read-from-string (nth 0 tokens)) commands)) ui)))))
+				(handler-case (funcall (cdr (assoc (read-from-string (nth 0 tokens)) commands)) ui)
+					(ALEXANDRIA:SIMPLE-PARSE-ERROR (c)
+						(format t "The price should be a real number!~%")))))))
