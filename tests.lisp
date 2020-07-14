@@ -37,7 +37,8 @@
 		   (container (list)))
 			(add-expense 1 "Education" "Book" 25.99 test-service)
 			(setf container (get-container test-service))	
-			(assert (string-equal (expense-to-csv-format (nth 0 container)) "1, Education, Book, 25.99"))
+			;;;(print (expense-to-csv-format (nth 0 container)))
+			(assert (string-equal (expense-to-csv-format (nth 0 container)) "1,Education,Book,25.99"))
 			(print "Test-expense-to-csv-format passed!")))
 
 
