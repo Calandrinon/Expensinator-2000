@@ -26,3 +26,10 @@
 (defmethod get-container ((service Service))
 	(get-repository-container (repository service)))
 
+
+(defmethod save-expenses ((service Service))
+	(write-repository-to-file (repository service)))
+
+
+(defmethod load-expenses ((service Service))
+	(read-expenses-from-file (repository service)))

@@ -26,6 +26,7 @@
 
 (defmethod ui-exit ((ui UI)) 
 	(setf (running ui) 0)
+	(save-expenses (service ui))
 	(exit))	
 
 
@@ -98,13 +99,12 @@
 
 
 (defmethod ui-run ((ui UI))
+	(load-expenses (service ui))
 	(let* ((command "")
 		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove) (cons 'help #'ui-help) (cons 'update #'ui-update)))
 		   (tokens (list)))
-
 		(loop for i from 1 to 50
 			do (ui-clearscreen ui))		
-
 		(loop while (= (running ui) 1)
 			do (progn 
 				(print '>>>)
