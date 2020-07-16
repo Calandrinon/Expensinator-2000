@@ -118,4 +118,8 @@
 				(setf tokens (cl-ppcre:split "\\s+" command))
 				(handler-case (funcall (cdr (assoc (read-from-string (nth 0 tokens)) commands)) ui)
 					(ALEXANDRIA:SIMPLE-PARSE-ERROR (c)
-						(format t "The price should be a real number!~%")))))))
+						(format t "The price should be a real number!~%"))
+						
+					(UNDEFINED-FUNCTION (c)
+						(format t "There is no such command! Type \"help\" to see the available commands~%")
+						))))))
