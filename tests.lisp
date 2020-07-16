@@ -42,10 +42,20 @@
 			(print "Test-expense-to-csv-format passed!")))
 
 
+(defun test-sum-of-expenses ()
+	(let* ((test-repository (make-instance 'Repository))
+		   (test-service (create-service test-repository)))
+			(add-expense 1 "Education" "Book" 5.5 test-service)
+			(add-expense 5 "Food" "Bread" 4.5 test-service)
+		
+		(assert (= (get-sum-of-expenses test-service) 10.0))
+		(print "Test-sum-of-expenses passed!")))
+
 (defun run-tests ()
 	(test-service-add)
 	(test-repo-remove)
 	(test-service-remove)
-	(test-expense-to-csv-format))
+	(test-expense-to-csv-format)
+	(test-sum-of-expenses))
 
 

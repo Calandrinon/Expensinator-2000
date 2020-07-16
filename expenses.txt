@@ -1,2 +1,2 @@
 1,Education,Thus Spoke Zarathustra,25.99
-25,Food,Bread,5.59
+13,Food,Tuna can,4.49

@@ -33,3 +33,11 @@
 
 (defmethod load-expenses ((service Service))
 	(read-expenses-from-file (repository service)))
+
+
+(defmethod get-sum-of-expenses ((service Service))
+	(let* ((container (get-container service))
+		   (sum 0.0))
+		(loop for expense in container
+			do (setf sum (+ sum (price expense))))	
+		sum))

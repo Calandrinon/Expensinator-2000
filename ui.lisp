@@ -18,6 +18,7 @@
 	(format t "Commands:~%")
 	(format t "		- add [adds a new expense]~%")
 	(format t "		- remove [removes an expense]~%")
+	(format t "		- update [updates an expense]~%")
 	(format t "		- list [displays all the expenses on the screen]~%")
 	(format t "		- exit [exits the program]~%")
 	(format t "		- clear [clears the screen]~%")
@@ -98,10 +99,14 @@
 		(update-expense id category product price (service ui))))
 
 
+(defmethod ui-sum-of-expenses ((ui UI)) 
+	(format t "Total of expenses: ~a~%" (get-sum-of-expenses (service ui))))
+
+
 (defmethod ui-run ((ui UI))
 	(load-expenses (service ui))
 	(let* ((command "")
-		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove) (cons 'help #'ui-help) (cons 'update #'ui-update)))
+		   (commands (list (cons 'exit #'ui-exit) (cons 'add #'ui-add) (cons 'list #'ui-list) (cons 'clear #'ui-clearscreen) (cons 'remove #'ui-remove) (cons 'help #'ui-help) (cons 'update #'ui-update) (cons 'total #'ui-sum-of-expenses)))
 		   (tokens (list)))
 		(loop for i from 1 to 50
 			do (ui-clearscreen ui))		
