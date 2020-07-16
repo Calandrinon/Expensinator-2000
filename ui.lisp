@@ -69,6 +69,7 @@
 
 
 (defmethod ui-list ((ui UI))
+	(format t "-----------------------------------------------------------------------------------------~%")
 	(let* ((container (get-container (service ui))))
 		(loop for product in container
 			do (display-expense product)
